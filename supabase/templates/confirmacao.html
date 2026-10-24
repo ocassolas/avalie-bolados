@@ -1,0 +1,14 @@
+<!-- Supabase → Authentication → Email Templates → Confirm signup
+     Assunto: Confirme sua conta no Avalie Bolados -->
+<div style="background:#0a0a0a;padding:40px 16px;font-family:Arial,Helvetica,sans-serif;color:#f4efe6">
+  <div style="max-width:480px;margin:0 auto;background:#161512;border:1px solid #2a2722;border-radius:20px;padding:32px;text-align:center">
+    <p style="margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#e9ae45">Avalie Bolados</p>
+    <h1 style="margin:16px 0 8px;font-family:Georgia,serif;font-size:28px;color:#f4efe6">Falta só um passo</h1>
+    <p style="margin:0 0 24px;color:#a39b8e;line-height:1.6">Confirme seu e-mail para ativar sua conta e entrar na roda.</p>
+    <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/onboarding"
+       style="display:inline-block;background:linear-gradient(135deg,#fbdd8f,#e9ae45,#b97d1e);color:#1a1206;font-weight:bold;text-decoration:none;padding:14px 28px;border-radius:12px">
+      Confirmar minha conta
+    </a>
+    <p style="margin:24px 0 0;font-size:12px;color:#6f685d">Se você não criou esta conta, ignore este e-mail. Só para maiores de 18 anos.</p>
+  </div>
+</div>

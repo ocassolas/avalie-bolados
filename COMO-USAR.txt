@@ -1,0 +1,564 @@
+=====================================================================
+                         AVALIE BOLADOS
+                  O troféu é de quem bola.
+              Guia completo de uso — versão 1.0
+=====================================================================
+
+Endereço do app: https://avaliebolados.com.br
+(reserva, sempre no ar: https://avalie-bolados.vercel.app)
+
+O Avalie Bolados é um app para a sua roda avaliar bolados (tabaco,
+beck, mesclado, cumbaibeck, com flor, ice, haxixe ou o que for) com um
+checklist de verdade. Cada bolado fica registrado com
+dia, hora, fotos e vídeos. A calculadora soma as notas, o ranking
+mostra quem manda e todo mundo ganha XP, sobe de nível e junta
+Brasas para comprar temas.
+
+Só para maiores de 18 anos.
+
+
+---------------------------------------------------------------------
+SUMÁRIO
+---------------------------------------------------------------------
+  0. ANTES DE TUDO: ligar o banco de dados (só o administrador)
+  1. Instalar no celular
+  2. Criar conta
+  3. Primeiros passos (onboarding)
+  4. Rodas: criar, convidar, entrar
+  5. Registrar um bolado
+  6. Avaliar um bolado (o checklist)
+  7. Como a nota é calculada
+  8. Ranking e Nota Ouro
+  9. Histórico
+ 10. Perfil
+ 11. XP, níveis, Brasas e conquistas
+ 12. Loja e temas
+ 13. Configurações
+ 14. Privacidade e seus dados (LGPD)
+ 15. Regras do jogo
+ 16. Perguntas frequentes
+ 17. Para o administrador (parte técnica)
+
+
+=====================================================================
+0. ANTES DE TUDO: LIGAR O BANCO DE DADOS (só o administrador)
+=====================================================================
+
+O banco já está criado (Supabase via Vercel, servidor em São Paulo)
+e o app está funcionando de verdade.
+
+Para abrir o painel do banco: Vercel > projeto avalie-bolados >
+Storage > avalie-bolados > "Open in Supabase".
+
+No painel do Supabase (Authentication), confira:
+  - URL Configuration > Site URL: https://avaliebolados.com.br
+  - URL Configuration > Redirect URLs: https://avaliebolados.com.br/**
+    e também https://avalie-bolados.vercel.app/** (endereço reserva)
+  - Email Templates: cole os arquivos da pasta supabase/templates
+    (confirmacao.html em "Confirm signup" e recuperar-senha.html em
+    "Reset password") para os e-mails saírem em português.
+
+Importante: o envio de e-mail gratuito do Supabase tem limite baixo
+(poucos e-mails por hora). Para muita gente se cadastrando no mesmo
+dia, configure um SMTP próprio (Resend, por exemplo) em
+Authentication > SMTP Settings.
+
+
+=====================================================================
+1. INSTALAR NO CELULAR
+=====================================================================
+
+O app é um PWA: funciona no navegador e pode ser instalado na tela
+inicial, com ícone, como um app normal.
+
+  iPhone (Safari): abra o link > botão Compartilhar >
+                   "Adicionar à Tela de Início".
+  Android (Chrome): abra o link > menu de três pontos >
+                   "Instalar app" ou "Adicionar à tela inicial".
+
+
+=====================================================================
+2. CRIAR CONTA
+=====================================================================
+
+Na página inicial, toque em "Criar conta" e preencha:
+
+  - Nome: como a roda te chama.
+  - Usuário: seu @ (3 a 20 caracteres: letras minúsculas, números,
+    ponto ou _). Não pode repetir.
+  - E-mail.
+  - Data de nascimento: menores de 18 anos são bloqueados.
+  - Senha: mínimo de 8 caracteres, com letras e números. A barrinha
+    mostra a força da senha.
+  - Confirmar senha: precisa ser igual.
+  - Três aceites obrigatórios: Termos de Uso, Política de
+    Privacidade e o consentimento para tratar dados sensíveis
+    (as avaliações e fotos registram hábitos, e a LGPD trata isso
+    como dado sensível).
+
+Depois chega um e-mail de confirmação. Clique no link e você entra
+direto no app.
+
+Esqueceu a senha? Na tela "Entrar", toque em "Esqueci a senha" e
+receba um link para criar outra.
+
+
+=====================================================================
+3. PRIMEIROS PASSOS (ONBOARDING)
+=====================================================================
+
+Na primeira entrada o app explica o básico em uma tela e pede para
+você escolher uma roda: entrar com um código ou criar a sua. Dá para
+pular e fazer depois.
+
+Toda conta nova ganha 50 Brasas de boas-vindas para estrear a loja.
+
+
+=====================================================================
+4. RODAS: CRIAR, CONVIDAR, ENTRAR
+=====================================================================
+
+A roda é o seu grupo. Cada roda tem ranking, histórico e regras
+próprias. Você pode estar em várias rodas (até 50 pessoas cada).
+
+  CRIAR: menu > Rodas > "Criar uma roda" > nome e descrição.
+         Você vira o Dono.
+
+  CONVIDAR: abra a roda > cartão "Convidar". Mande o código de 8
+         letras ou toque em "Compartilhar" para enviar o link no
+         WhatsApp. Quem abrir o link cai direto na tela de entrar
+         na roda.
+
+  ENTRAR: menu > Rodas > "Entrar com código" > cole o código.
+
+Funções na roda:
+  - Dono: tudo. Muda funções, transfere a roda, edita pesos, apaga
+    a roda.
+  - Admin: edita nome, descrição e pesos, gera código novo e
+    remove membros.
+  - Membro: registra, avalia e envia mídia.
+
+No menu (três pontinhos) de cada membro, o Dono pode tornar admin,
+tirar admin, transferir a roda ou remover. Para sair de uma roda
+que você criou, transfira para alguém antes.
+
+"Gerar código novo" invalida o código antigo (útil se ele vazou).
+
+
+=====================================================================
+5. REGISTRAR UM BOLADO
+=====================================================================
+
+Toque no botão dourado "+" (no meio da barra de baixo, no celular,
+ou em "Novo bolado", no computador).
+
+  1. O QUE TEM DENTRO: marque tudo o que foi pra seda.
+     Tabaco ........ tabaco desfiado, fumo de rolo, tabaco
+                     aromatizado, tabaco natural, fumo de palheiro
+     Flor e extrações flor (bud/skunk), prensado (pren), flor de
+                     CBD, dry, kief, haxixe, ice, crumble, rosin,
+                     wax/budder, shatter, óleo/BHO, moonrock
+     Ervas ......... blend de ervas, ervas aromáticas (naturais,
+                     sem THC ou CBD)
+     Aditivos ...... mentol, essência
+
+     O TIPO SE DEFINE SOZINHO:
+       só tabaco ......................... TABACO
+       só flor/extração .................. BECK
+       tabaco + flor/extração ............ MESCLADO (ex.: tabaco com ice)
+       só ervas .......................... CUMBAIBECK
+     Aditivo sozinho não vale: precisa de uma base.
+     No mesclado aparece a PROPORÇÃO (quanto é tabaco, quanto é
+     flor/extração).
+     Peso em gramas é opcional.
+  2. Roda (se você estiver em mais de uma).
+  3. Quem bolou: toque na foto da pessoa. Pode ser você ou qualquer
+     membro da roda.
+  4. Dia e hora: já vem com o momento atual; ajuste se bolou antes.
+     Esse é o "registro digital" do bolado: fica no histórico para
+     sempre com data e hora.
+  5. Seda/papel (brown, branca, cânhamo, arroz, celulose, sabor,
+     blunt, palha, cone pronto), tamanho (mini a king size) e piteira
+     (papel, papelão, vidro, cerâmica, madeira, carvão, algodão).
+     Tudo opcional, com a opção "Outro".
+  6. Observações (opcional).
+  7. Fotos e vídeos: até 8 arquivos. As fotos são comprimidas
+     automaticamente; vídeos até 50 MB.
+
+Toque em "Registrar bolado". Se foi outra pessoa que bolou, o app
+já te leva para avaliar.
+
+
+=====================================================================
+6. AVALIAR UM BOLADO (O CHECKLIST)
+=====================================================================
+
+Abra o bolado (pelo Início, em "Esperando sua nota", pelo Histórico
+ou pelo link) e toque em "Avaliar este bolado".
+
+A avaliação é um passo a passo em duas fases:
+
+  ---------------- PRÉ-CREMA (antes de acender) ----------------
+
+  1. BOLAR (opcional, peso 0,5)
+     Avaliação durante o bolamento: técnica, cuidado, capricho.
+     Checklist: preparou o material com cuidado, sem desperdício,
+     técnica firme, tempo razoável, deixou tudo limpo.
+     Não acompanhou? Toque em "Pular este critério": ele sai da
+     conta e não prejudica ninguém.
+
+  2. ESTÉTICA / APARÊNCIA (peso 1)
+     Formato uniforme, papel liso sem rasgos, ponta bem fechada,
+     piteira alinhada, colagem limpa.
+
+  3. CONSTRUÇÃO / CONSTRUTO (peso 1,5)
+     Firmeza certa (nem mole, nem socado), material bem distribuído,
+     sem pontos ocos, piteira bem encaixada, proporção equilibrada.
+
+  ------------------- "HORA DE ACENDER" 🔥 ---------------------
+
+  Uma tela de transição marca o fim do pré-crema. Acenda, dê umas
+  puxadas e toque em "Acendi!".
+
+  ---------------- PÓS-CREMA (depois de acender) ----------------
+
+  4. CREMA (peso 1,5)
+     Consistência da crema e fluxo de ar: queima uniforme sem
+     canoa, cinza firme, não apagou sozinho, puxada no ponto, não
+     esquentou demais.
+     Aqui você também marca o FLUXO DE AR: Leve, No ponto ou Pesado.
+
+  5. SABOR (peso 1)
+     Seu gosto pessoal.
+
+  6. EXPERIÊNCIA (peso 1)
+     Como foi o momento que o candidato proporcionou: vibe,
+     resenha, duração, "fumaria outro desse".
+
+Em cada critério:
+  - Marque os itens do checklist que o bolado cumpre. O app sugere
+    uma nota com base no que você marcou ("Usar nota sugerida").
+  - Dê a nota de 0 a 10 no controle deslizante ou nos atalhos
+    (5, 6, 7, 7,5 ... 10). Vai de 0,5 em 0,5.
+
+No fim vem a REVISÃO: o gráfico radar com todas as notas, a lista
+para corrigir qualquer critério (toque nele) e um campo de FEEDBACK
+para o bolador (opcional, até 1000 caracteres).
+
+Toque em "Enviar avaliação": sua nota aparece com confete dourado
+e a nota final do bolado é atualizada na hora.
+
+Saiu no meio? O rascunho fica salvo no aparelho.
+Errou? Dá para editar a avaliação nas primeiras 24 horas.
+
+
+=====================================================================
+7. COMO A NOTA É CALCULADA
+=====================================================================
+
+A CALCULADORA fica fixa na tela durante a avaliação (no topo, no
+celular, e na lateral, no computador) e mostra a conta ao vivo.
+
+  Nota do avaliador = soma(nota × peso) ÷ soma dos pesos
+
+  Exemplo (Bolar pulado):
+    Estética 9 × 1      =  9
+    Construção 8 × 1,5  = 12
+    Crema 10 × 1,5      = 15
+    Sabor 9 × 1         =  9
+    Experiência 9 × 1   =  9
+                         ----
+    54 ÷ (1 + 1,5 + 1,5 + 1 + 1) = 54 ÷ 6 = 9,00
+
+  Nota final do bolado = média das notas de todos os avaliadores.
+
+Faixas de nota:
+  9,5 ou mais  Obra-prima
+  8,5 a 9,4    Excelente
+  7,0 a 8,4    Muito bom
+  5,0 a 6,9    Na média
+  3,0 a 4,9    Precisa treinar
+  abaixo de 3  Desastre
+
+O Dono ou um Admin pode mudar o peso de cada critério da roda em
+Rodas > (sua roda) > Configurações da roda. Peso 0 tira o critério
+da conta. Vale para as próximas avaliações.
+
+
+=====================================================================
+8. RANKING E NOTA OURO
+=====================================================================
+
+A tela inicial mostra o PÓDIO da sua roda (1º, 2º e 3º com foto e
+nota) e a lista dos demais. O Ranking completo fica no menu.
+
+Filtros: por roda, Global, e por tipo (Tabaco, Beck, Mesclado, Cumbaibeck).
+
+A ordem é pela NOTA OURO, uma média "justa" (bayesiana): é como se
+todo mundo começasse com 3 bolados fantasmas com a nota média da
+roda. Assim, quem tem um único 10 não passa na frente de quem
+mantém 9 em vinte bolados. Quanto mais bolados avaliados, mais a
+Nota Ouro se aproxima da sua média real.
+
+O RANKING GLOBAL mostra só quem ligou o "perfil público" nas
+configurações, e só números (nada de fotos ou avaliações).
+
+
+=====================================================================
+9. HISTÓRICO
+=====================================================================
+
+Menu > Histórico. Uma linha do tempo agrupada por dia, com a hora de
+cada bolado, quem bolou, tipo, nota e quantidade de avaliações.
+
+  - Filtros: 7, 30 ou 90 dias ou tudo; beck/tabaco; todo mundo ou
+    só os meus; por roda.
+  - Mapa de calor das últimas 12 semanas (quanto mais dourado,
+    mais bolados no dia).
+  - Toque em qualquer bolado para ver detalhes, notas de cada
+    avaliador, feedbacks, fotos e vídeos.
+
+
+=====================================================================
+10. PERFIL
+=====================================================================
+
+Toque em qualquer foto ou nome para abrir o perfil.
+
+  - Foto (com moldura da loja), nome, @, título, bio, nível e XP.
+  - Números: bolados, melhor nota, média no beck, média no tabaco,
+    avaliações feitas e "nota que dá" (mão aberta, equilibrado ou
+    exigente).
+  - Pontos fortes: radar com a média por critério nas notas
+    recebidas.
+  - Conquistas desbloqueadas.
+  - Abas: Bolados, Avaliações, Fotos e Vídeos.
+
+No seu perfil, "Editar perfil" leva às configurações.
+
+
+=====================================================================
+11. XP, NÍVEIS, BRASAS E CONQUISTAS
+=====================================================================
+
+Tudo o que você faz rende XP (experiência) e Brasas (a moeda):
+
+  Bônus de boas-vindas ................ +50 Brasas
+  Primeira atividade do dia ........... +10 XP  +3 Brasas
+  Bolar um bolado (ser o bolador) ..... +20 XP  +10 Brasas
+  Registrar o bolado de outra pessoa ..  +5 XP  +2 Brasas
+  Avaliar um bolado ................... +15 XP  +8 Brasas
+  Receber uma avaliação ...............  +5 XP  +2 Brasas
+  Receber nota 9 ou mais .............. +15 XP  +5 Brasas
+  Enviar foto, vídeo ou link ..........  +5 XP  +2 Brasas
+  Criar uma roda ...................... +10 XP  +5 Brasas
+  Subir de nível ...................... +25 Brasas por nível
+
+Teto de 400 XP por dia, para ninguém "farmar".
+
+NÍVEIS (cada nível pede um pouco mais de XP que o anterior):
+  Nv. 1   Aprendiz de Seda
+  Nv. 3   Bolador de Esquina
+  Nv. 5   Artesão do Cone
+  Nv. 8   Mestre da Seda
+  Nv. 12  Alquimista da Brasa
+  Nv. 16  Lorde da Fumaça
+  Nv. 20  Grão-Mestre
+  Nv. 25  Lenda do Cone
+
+CONQUISTAS (cada uma dá Brasas extras):
+  Primeiro Cone ...... registrou o primeiro bolado
+  Fundador ........... criou uma roda
+  Nota 10 ............ recebeu um 10 de alguém
+  Avaliador Justo .... fez 10 avaliações
+  Crítico Gourmet .... fez 50 avaliações
+  Chama Acesa ........ usou o app 7 dias seguidos
+  Mestre do Tabaco ... 5 tabacos com nota final 8,5 ou mais
+  Mestre do Beck ..... 5 becks com nota final 8,5 ou mais
+  Mestre do Mesclado . 5 mesclados com nota final 8,5 ou mais
+  Mestre do Cumbaibeck .. 5 cumbaibecks (ervas) com nota final 8,5 ou mais
+  Laboratório ........ usou 6 conteúdos diferentes nos seus bolados
+  Fotógrafo .......... enviou 10 fotos
+  Cineasta ........... enviou 3 vídeos
+  Veterano ........... chegou ao nível 10
+
+Menu > Conquistas mostra tudo isso e o seu extrato de XP e Brasas.
+
+
+=====================================================================
+12. LOJA E TEMAS
+=====================================================================
+
+Menu > Loja (ou toque no contador de Brasas no topo).
+
+  TEMAS: mudam as cores do app inteiro, só para você.
+    Ouro Noturno (grátis) · Neblina (tema claro, 100) ·
+    Esmeralda (150, nv. 2) · Brasa (200, nv. 3) ·
+    Tabacaria (250, nv. 4) · Neon 420 (300, nv. 5) ·
+    Diamante (800, nv. 10)
+    O botão do olho mostra uma prévia antes de comprar.
+
+  MOLDURAS: um aro especial na sua foto, visível no ranking.
+    Aro de Ouro (100) · Em Chamas (250, nv. 3, animada) ·
+    Fumaça (300, nv. 5) · Coroa (600, nv. 8)
+
+  TÍTULOS: aparecem embaixo do seu nome.
+    O Artesão (80) · Crítico Gourmet (150) · Rei da Seda (200) ·
+    Mão de Ouro (400) · Lenda Viva (1000)
+
+Comprou? Toque em "Equipar". Molduras e títulos podem ser
+removidos quando quiser. Itens não têm valor em dinheiro.
+
+
+=====================================================================
+12B. AMIGOS, RANK E PLAYBOOK
+=====================================================================
+
+AMIGOS (menu > Amigos)
+  - Procure pelo @ e toque em Adicionar. A pessoa aceita ou recusa.
+  - Se os dois pedirem um ao outro, a amizade vale na hora.
+  - Amigos veem o perfil um do outro, mesmo sem estar na mesma roda.
+  - Ranking dos amigos: você e seus amigos ordenados pela Nota Ouro.
+
+RANK DE HABILIDADE
+  - Mostra em que nível você bola, calculado pela Nota Ouro de TODOS
+    os seus bolados avaliados.
+  - Com menos de 3 bolados avaliados você fica "Em calibração".
+  - "Do seu nível" (em Amigos) mostra quem você conhece no mesmo rank.
+
+PLAYBOOK (menu > Meu playbook) - opcional
+  - O tutorial do SEU jeito de bolar: estilo, tempo médio, seda,
+    tamanho, piteira, passos com foto e uma dica.
+  - Aparece na aba Playbook do seu perfil e no botão "Playbook" ao
+    lado do seu nome na lista de membros da roda.
+  - Só veem os amigos e quem está nas suas rodas.
+
+
+=====================================================================
+13. CONFIGURAÇÕES
+=====================================================================
+
+Menu > Configurações:
+
+  - Perfil: trocar foto, nome, @ e bio.
+  - Aparência: trocar entre os temas que você já tem.
+  - Privacidade: perfil público / ranking global (desligado por
+    padrão).
+  - Conta: trocar e-mail (com confirmação), trocar senha, sair.
+  - Meus dados (LGPD): ver consentimentos, exportar dados, revogar
+    consentimento, excluir conta.
+
+
+=====================================================================
+14. PRIVACIDADE E SEUS DADOS (LGPD)
+=====================================================================
+
+  - Privado por padrão: seu perfil, bolados, notas e fotos só
+    aparecem para quem está nas suas rodas. Ninguém de fora vê
+    nada, e essa regra é aplicada no próprio banco de dados, não
+    só na tela.
+  - Fotos e vídeos ficam em armazenamento privado e só abrem por
+    links temporários.
+  - Sem anúncios, sem rastreadores, sem venda de dados.
+
+Seus direitos, direto no app (Configurações > Meus dados):
+  - EXPORTAR: baixa um arquivo com todos os seus dados.
+  - CORRIGIR: edite perfil e conta quando quiser.
+  - REVOGAR: retire o consentimento de dados sensíveis.
+  - EXCLUIR: digite EXCLUIR e confirme. Apagamos perfil, bolados,
+    avaliações feitas e fotos enviadas. Rodas que você criou passam
+    para o membro mais antigo (ou somem, se ficarem vazias). Não
+    dá para desfazer.
+
+Termos de Uso: https://avaliebolados.com.br/termos
+Política de Privacidade: https://avaliebolados.com.br/privacidade
+
+
+=====================================================================
+15. REGRAS DO JOGO
+=====================================================================
+
+  - Ninguém avalia o próprio bolado.
+  - Uma avaliação por pessoa por bolado; dá para editar por 24 h.
+  - Notas de 0 a 10, de 0,5 em 0,5. Todos os critérios são
+    obrigatórios, menos Bolar.
+  - Fotos e vídeos só com autorização de quem aparece. Nada com
+    menores de idade.
+  - O app não vende, não incentiva e não facilita o consumo de
+    nada. Fumar faz mal à saúde. Respeite a lei.
+
+
+=====================================================================
+16. PERGUNTAS FREQUENTES
+=====================================================================
+
+P: Não recebi o e-mail de confirmação.
+R: Olhe o spam e a aba Promoções. O envio gratuito do Supabase tem
+   limite por hora; espere alguns minutos e tente de novo.
+
+P: Por que não consigo avaliar um bolado?
+R: Ou o bolado é seu, ou você já avaliou há mais de 24 horas.
+
+P: Meu amigo não aparece no ranking global.
+R: Ele precisa ligar "perfil público" nas configurações.
+
+P: Errei quem bolou / a hora.
+R: Quem registrou, o bolador ou um admin pode apagar o bolado
+   (menu "..." no bolado) e registrar de novo.
+
+P: Por que a minha nota no ranking é menor que a minha média?
+R: É a Nota Ouro: com poucos bolados ela fica perto da média da
+   roda. Quanto mais bolados avaliados, mais perto da sua média.
+
+P: Dá para usar no computador?
+R: Sim. No computador aparece um menu lateral.
+
+
+=====================================================================
+17. PARA O ADMINISTRADOR (PARTE TÉCNICA)
+=====================================================================
+
+Pasta do projeto: a raiz deste repositório
+
+  Stack ........... Next.js 16 + React 19 + TypeScript + Tailwind 4
+  Banco ........... Supabase (Postgres com RLS, Auth, Storage)
+  Hospedagem ...... Vercel, projeto "avalie-bolados", região São Paulo
+  Detalhes ........ README.md
+
+Comandos (no terminal, dentro da pasta):
+  npm run dev ........... roda local em http://localhost:3000
+  npm run build ......... confere se compila
+  npm test .............. testes da calculadora
+  npm run icons ......... regenera ícones a partir da logo SVG
+  vercel deploy --prod .. publica uma nova versão
+
+Logo e marca (pasta public/brand):
+  logo-mark.svg ....... marca em vetor, fundo transparente
+  logo-full.svg/.png .. marca + nome
+  app-icon.svg ........ ícone do app (quadrado arredondado preto)
+  maskable.svg ........ ícone Android
+  logo-mark-1024.png .. marca em alta resolução, fundo transparente
+  logo-original.jpg ... a arte original enviada
+  Favicon, ícones PWA (192/512), ícone Apple e imagem de
+  compartilhamento são gerados a partir do SVG.
+
+Banco (pasta supabase):
+  migrations/ ...... tabelas, segurança (RLS), XP, ranking, LGPD
+  templates/ ....... e-mails em português (confirmação e senha)
+
+Variáveis de ambiente (veja .env.example):
+  NEXT_PUBLIC_SUPABASE_URL
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (ou NEXT_PUBLIC_SUPABASE_ANON_KEY)
+  NEXT_PUBLIC_SITE_URL (opcional)
+  NEXT_PUBLIC_PRIVACY_CONTACT (opcional: contato na Política de
+    Privacidade; recomendo preencher com um e-mail de contato)
+
+Sem as duas primeiras, o app entra sozinho em modo demonstração.
+
+Limites do plano gratuito do Supabase: 500 MB de banco e 1 GB de
+arquivos. Fotos são comprimidas para cerca de 1 MB; para vídeos
+longos, prefira colar link do YouTube ou Instagram.
+
+=====================================================================
+                    Bom bolado e boa resenha. 🏆
+=====================================================================

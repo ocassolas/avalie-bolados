@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Avalie Bolados — design tokens
+   Cada tema troca só as variáveis. O padrão é "Ouro Noturno", tirado da logo.
+   Linguagem visual de iOS: fonte do sistema (SF), cores chapadas, listas
+   agrupadas e animações com a curva de mola do iOS.
+   ========================================================================== */
+
+:root,
+[data-theme="ouro"] {
+  color-scheme: dark;
+  --bg: #0a0a0a;
+  --bg-2: #100f0d;
+  --surface: #1a1916;
+  --surface-2: #262420;
+  --line: #2a2722;
+  --line-strong: #3a352d;
+  --fg: #f4efe6;
+  --muted: #a39b8e;
+  --faint: #6f685d;
+  --accent: #e9ae45;
+  --accent-2: #fbdd8f;
+  --accent-3: #b97d1e;
+  --accent-fg: #1a1206;
+  --ember: #ff7a3d;
+  --leaf: #8c9a45;
+  --success: #57c27a;
+  --danger: #ef5b52;
+  --glow: rgba(233, 174, 69, 0.18);
+}
+
+[data-theme="neblina"] {
+  color-scheme: light;
+  --bg: #f2efea;
+  --bg-2: #ebe6df;
+  --surface: #fbf9f6;
+  --surface-2: #f3efe9;
+  --line: #e0d9ce;
+  --line-strong: #cfc5b6;
+  --fg: #1b1814;
+  --muted: #6b6257;
+  --faint: #9a9185;
+  --accent: #a8701a;
+  --accent-2: #d49a3a;
+  --accent-3: #7a4f0e;
+  --accent-fg: #fffaf0;
+  --ember: #d9561c;
+  --leaf: #5f6b2e;
+  --success: #2f8f4f;
+  --danger: #c8372e;
+  --glow: rgba(168, 112, 26, 0.14);
+}
+
+[data-theme="esmeralda"] {
+  --bg: #07120d;
+  --bg-2: #0a1712;
+  --surface: #0f1f18;
+  --surface-2: #14281f;
+  --line: #1e3a2d;
+  --line-strong: #2a4d3c;
+  --fg: #ecf6f0;
+  --muted: #94b3a3;
+  --faint: #5f7d6e;
+  --accent: #3ddc97;
+  --accent-2: #a6f5cf;
+  --accent-3: #1f9e68;
+  --accent-fg: #04140c;
+  --ember: #f2c14e;
+  --glow: rgba(61, 220, 151, 0.16);
+}
+
+[data-theme="brasa"] {
+  --bg: #120806;
+  --bg-2: #180c08;
+  --surface: #1f110c;
+  --surface-2: #2a1710;
+  --line: #3b2016;
+  --line-strong: #522d1f;
+  --fg: #fbeee6;
+  --muted: #c0a092;
+  --faint: #86675a;
+  --accent: #ff7a3d;
+  --accent-2: #ffb38a;
+  --accent-3: #c94a14;
+  --accent-fg: #1c0802;
+  --ember: #ffd166;
+  --glow: rgba(255, 122, 61, 0.2);
+}
+
+[data-theme="tabacaria"] {
+  --bg: #17110c;
+  --bg-2: #1c150f;
+  --surface: #241b13;
+  --surface-2: #2e2218;
+  --line: #3d2f22;
+  --line-strong: #524030;
+  --fg: #f6ecdd;
+  --muted: #bfa88c;
+  --faint: #86725c;
+  --accent: #c99a6b;
+  --accent-2: #ecc89f;
+  --accent-3: #8f6440;
+  --accent-fg: #1a1007;
+  --ember: #e0703a;
+  --glow: rgba(201, 154, 107, 0.18);
+}
+
+[data-theme="neon"] {
+  --bg: #0b0614;
+  --bg-2: #100a1c;
+  --surface: #160e26;
+  --surface-2: #1e1433;
+  --line: #2d1f4a;
+  --line-strong: #3e2b63;
+  --fg: #f3edff;
+  --muted: #a99bc9;
+  --faint: #6f6290;
+  --accent: #b6ff3b;
+  --accent-2: #e2ff9e;
+  --accent-3: #7bc41a;
+  --accent-fg: #0d1402;
+  --ember: #c86bff;
+  --glow: rgba(182, 255, 59, 0.16);
+}
+
+[data-theme="diamante"] {
+  --bg: #060a10;
+  --bg-2: #090e16;
+  --surface: #0e1520;
+  --surface-2: #131d2b;
+  --line: #1f2c3e;
+  --line-strong: #2c3d55;
+  --fg: #eef6ff;
+  --muted: #9cb0c8;
+  --faint: #62758d;
+  --accent: #9be7ff;
+  --accent-2: #e0f8ff;
+  --accent-3: #4fb3d9;
+  --accent-fg: #03121a;
+  --ember: #d4dcff;
+  --glow: rgba(155, 231, 255, 0.18);
+}
+
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-fg: var(--accent-fg);
+  --color-ember: var(--ember);
+  --color-leaf: var(--leaf);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  /* Preenchimento translúcido do iOS (campos, controles segmentados) */
+  --color-fill: color-mix(in oklab, var(--fg) 9%, transparent);
+  --color-fill-strong: color-mix(in oklab, var(--fg) 16%, transparent);
+
+  /* SF Pro no iPhone/Mac; Inter (a mais próxima) no Android e Windows */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  /* Números: SF Pro Rounded, como nos apps da Apple */
+  --font-mono: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, var(--font-inter), system-ui, sans-serif;
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  /* Curvas do iOS: a de folhas/navegação e uma mola com leve rebote */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: linear(0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%, 0.938 16.7%, 1.017 19.4%, 1.067, 1.099 24.3%, 1.108 26%, 1.103, 1.085 30.8%, 1.032 37.1%, 1.002 43.6%, 0.993 50%, 0.995 63.6%, 1);
+
+  --animate-rise: rise 0.55s var(--ease-ios) both;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-smoke: smoke 6s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+@keyframes smoke {
+  0%, 100% { transform: translateY(0) scaleX(1); opacity: 0.9; }
+  50% { transform: translateY(-6px) scaleX(1.06); opacity: 0.6; }
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.85; filter: brightness(1.25); }
+}
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes sheet-in { from { transform: translateY(100%); } }
+@keyframes sheet-out { to { transform: translateY(100%); } }
+/* Só escala: o centralizado vem da propriedade translate do Tailwind */
+@keyframes alert-in { from { opacity: 0; transform: scale(1.12); } }
+@keyframes alert-out { to { opacity: 0; transform: scale(0.96); } }
+
+html {
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display { letter-spacing: -0.022em; }
+.font-mono { font-variant-numeric: tabular-nums; letter-spacing: 0; }
+
+::selection { background: color-mix(in oklab, var(--accent) 40%, transparent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Transição entre páginas (ver src/app/(app)/template.tsx) */
+::view-transition-old(.page) { animation: 160ms ease-in both fade-out; }
+::view-transition-new(.page) { animation: 420ms var(--ease-ios) both rise; }
+
+@layer components {
+  /* Antes eram gradientes "folheados"; no iOS a cor de destaque é chapada */
+  .text-foil { color: var(--accent); }
+  .bg-foil { background: var(--accent); }
+
+  /* Célula agrupada do iOS: sem borda pesada, só a superfície */
+  .card {
+    background: var(--surface);
+    border: 0.5px solid color-mix(in oklab, var(--line) 70%, transparent);
+    border-radius: var(--radius-2xl);
+  }
+  .card-glow { box-shadow: none; }
+
+  /* Vidro das barras (tab bar, navegação, folhas) */
+  .glass {
+    background: color-mix(in oklab, var(--bg) 72%, transparent);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    backdrop-filter: saturate(180%) blur(24px);
+  }
+
+  /* Toque: encolhe e volta com mola, como nos controles do iOS */
+  .press {
+    transition: transform 0.45s var(--ease-spring), opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  .press:active { transform: scale(0.96); opacity: 0.8; transition-duration: 0.12s; }
+  a.card { transition: transform 0.45s var(--ease-spring), background-color 0.2s ease; }
+  a.card:active { transform: scale(0.98); background: var(--surface-2); transition-duration: 0.12s; }
+
+  /* Lista agrupada do iOS: linhas com separador recuado */
+  .list-group { background: var(--surface); border-radius: var(--radius-2xl); overflow: hidden; }
+  .list-group > * + * { box-shadow: inset 0 0.5px 0 var(--line); }
+
+  /* Destaque do controle segmentado: mais claro que o trilho, branco no tema claro */
+  .segment-thumb {
+    background: color-mix(in oklab, var(--fg) 20%, var(--surface-2));
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04);
+  }
+  [data-theme="neblina"] .segment-thumb { background: #fff; }
+
+  .tabular { font-variant-numeric: tabular-nums; }
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+    border-radius: 0.75rem;
+  }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+  /* Folha (sheet) e alerta do iOS, usados com Radix Dialog */
+  .sheet-overlay[data-state="open"], .alert-overlay[data-state="open"] { animation: fade-in 0.35s var(--ease-ios); }
+  .sheet-overlay[data-state="closed"], .alert-overlay[data-state="closed"] { animation: fade-out 0.25s var(--ease-ios) forwards; }
+  .sheet[data-state="open"] { animation: sheet-in 0.5s var(--ease-ios); }
+  .sheet[data-state="closed"] { animation: sheet-out 0.3s var(--ease-ios) forwards; }
+  .alert[data-state="open"] { animation: alert-in 0.4s var(--ease-spring); }
+  .alert[data-state="closed"] { animation: alert-out 0.18s ease-in forwards; }
+
+  /* Molduras de avatar compradas na loja */
+  .frame-ouro { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+  .frame-fogo { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ember), 0 0 18px 2px color-mix(in oklab, var(--ember) 60%, transparent); animation: flicker 1.6s ease-in-out infinite; }
+  .frame-fumaca { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in oklab, var(--fg) 45%, transparent), 0 0 22px 4px color-mix(in oklab, var(--fg) 18%, transparent); }
+  .frame-coroa { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-2), 0 0 0 6px var(--accent-3), 0 0 26px 2px var(--glow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
